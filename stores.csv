@@ -1,0 +1,13 @@
+store_id,store_name,city,region
+101,Mart_Delhi_1,Delhi,North
+102,Mart_Mumbai_1,Mumbai,West
+103,Mart_Blr_1,Bangalore,South
+104,Mart_Pune_1,Pune,West
+105,Mart_Chennai_1,Chennai,South
+106,Mart_Kolkata_1,Kolkata,East
+107,Mart_Delhi_2,Delhi,North
+108,Mart_Mumbai_2,Mumbai,West
+109,Mart_Jaipur_1,Jaipur,North
+110,Mart_Hyd_1,Hyderabad,South
+111,Mart_Noida_1,Noida,North
+112,Mart_Surat_1,Surat,West
