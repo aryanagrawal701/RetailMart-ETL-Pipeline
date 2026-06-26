@@ -1,21 +1,39 @@
-# ETL Data Pipeline Assignment
+# RetailMart ETL Data Pipeline
 
-Hello, this is my submission for the Data Engineering technical assignment. I created an ETL pipeline using Python, Pandas, and SQLite to clean and process retail sales data.
+Hello, This is a simple ETL (Extract, Transform, Load) pipeline project. It takes raw retail data, cleans it up, does some calculations, and saves it into a local database.
 
-## My Logic and Steps
+## How This Project Works
+I write a Python script (etl_pipeline.py) that runs the whole process step-by-step:
 
-1. **Reading Data:** I loaded the 3 raw CSV files (sales, products, stores) into pandas dataframes. I manually added some duplicate rows and missing values in the dummy data to test my cleaning logic.
-2. **Cleaning:** I first removed the duplicate rows. For missing data, if the 'quantity' was missing, I filled it with 0. However, if the 'amount' was missing, I completely dropped that row because a transaction without an amount cannot be used to calculate revenue. 
-3. **Merging:** I used a LEFT JOIN to combine the sales data with product and store details. I chose a left join specifically so that no core sales records are lost during the merge, even if product or store IDs are missing.
-4. **Database Storage:** I calculated the total revenue (quantity * price) and saved the final clean data into a local SQLite database (`retail_database.db`). I chose SQLite so that anyone checking my code can run it easily without needing to set up a separate SQL server.
-5. **Queries:** Finally, I ran SQL queries inside the script to print the top 3 best-selling products and the total revenue per store.
+1. Extract (Reading Data): First, it reads dummy data from three CSV files (sales_data.csv, products.csv, stores.csv). It also checks the shape of the data and looks for missing values.
 
-## How to run the code
+2. Transform (Cleaning Data): 
+   - It removes duplicate rows.
+   - If the quantity is missing, it puts a 0. But if the amount is missing, it drops the row entirely (because we can't calculate revenue without money details).
+   - It also fixes the date format and converts the amount to float so the math works properly.
 
-1. Open your terminal and install the required libraries:
-   `pip install pandas numpy`
+3. Transform (Merging & Calculations): 
+   - It joins the three tables together using a LEFT JOIN so we don't lose any original sales data.
+   - It calculates the total_revenue (Quantity * Price). 
+   - I used NumPy to quickly find the average, highest, and lowest revenue.
 
-2. Run the python script:
-   `python etl_pipeline.py`
+4. Load (Saving Data): 
+   - It automatically creates a local SQLite database (retail_database.db) and saves all the clean data into a table called retail_sales.
 
-After running, you will see the cleaning process logs and the final business reports in the terminal. The `retail_database.db` file will also be created in the same folder.
+5. Final Reports: 
+   - At the very end, it runs SQL queries inside Python to show the top 3 best-selling products. 
+   - It also prints a quick summary report on the terminal (total transactions, top city, etc.).
+
+## Tools I Used
+* Python: The main language for writing the script.
+* Pandas: For reading, cleaning, and joining the tables easily.
+* NumPy: For doing fast math calculations on the revenue.
+* SQLite3: I used this because it creates a simple local .db file. .
+
+## How to Run It
+Make sure you have Python installed, and run `pip install pandas numpy` if you don't have them.
+1. Download or clone this folder.
+2. Open your terminal inside this folder.
+3. Run this command:
+   python etl_pipeline.py
+4. You will see the step-by-step output on your screen, and a new database file will be created automatically.
